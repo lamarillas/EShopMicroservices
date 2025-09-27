@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using BuildingBlocks.CQRS;
+using Catalog.API.Models;
+using MediatR;
 
 namespace Catalog.API.Products.CreateProduct;
 
@@ -8,14 +10,30 @@ public record CreateProductCommand(
     string Description, 
     string ImageFile, 
     decimal Price
-) : IRequest<CreateProductResult>;
+) : ICommand<CreateProductResult>;
 
 public record CreateProductResult(Guid Id);
 
-public class CreateProductHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
+public class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
-    public Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        // CREATE Product ENTITY FROM COMMAND OBJECT
+        var product = new Product
+        {
+            Name = command.Name,
+            Category = command.Category,
+            Descripcion = command.Description,
+            ImageFile = command.ImageFile,
+            Price = command.Price
+        };
+
+
+        // TODO: Save to DB
+
+
+        // RETURN RESULT
+        return new CreateProductResult(Guid.NewGuid());
+
     }
 }
