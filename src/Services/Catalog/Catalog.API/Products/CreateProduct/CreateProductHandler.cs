@@ -14,7 +14,7 @@ public record CreateProductCommand(
 
 public record CreateProductResult(Guid Id);
 
-public class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
+internal class CreateProductHandler : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
