@@ -14,6 +14,7 @@ builder.Services.AddMediatR(config =>
 builder.Services.AddMarten(opt =>
 {
     opt.Connection(builder.Configuration.GetConnectionString("Database")!);
+
 }).UseLightweightSessions();
 
 
