@@ -38,7 +38,7 @@ app.UseExceptionHandler(exceptionHanlderApp =>
     exceptionHanlderApp.Run(async context =>
     {
         var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-        if(exception is null)
+        if (exception is null)
         {
             return;
         }
